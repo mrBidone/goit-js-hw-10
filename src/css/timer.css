@@ -2,38 +2,57 @@
 
 body {
   font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
 }
 
-input {
-    box-sizing: border-box;
+.link-to-main {
+  display: inline-block;
+  font-size: 14px;
+  text-decoration: none;
+  color: #4E75FF;
+  font-weight: 500;
+  border: 1px solid #4E75FF;
+  padding: 5px 5px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  transition: background-color 250ms linear;
+}
+
+.link-to-main:hover,
+.link-to-main:focus {
+  border-color: #FFFFFF;
+  background-color: #4E75FF;
+  color: #FFFFFF;
+}
+
+input { 
     width: 272px;
     height: 40px;
-    padding-left: 16px;
+    padding: 0 0 0 16px;
     margin-right: 8px;
-
     font-family: "Montserrat";
     font-weight: 400;
     font-size: 16px;
     line-height: 1.5;
     letter-spacing: 0.04em;
-    color: #2e2f42;
     border: 1px solid #808080;
     border-radius: 4px;
+    color: #808080;
+    transition: border-color 250ms linear;
     
 }
 
-input:hover{
+
+.active-input {
+  color: #2e2f42;
+  cursor: pointer;
+}
+.active-input:hover {
   border-color: #111111;
 }
-
-input:active {
-  border-color: #4E75FF;
+.active-input:active {
+  border: 1px solid #4E75FF;
 }
-
-input:disabled{
-  color: #808080;
-}
-
 
 
 .timer {
@@ -50,16 +69,46 @@ input:disabled{
 
 .value {
     font-weight: 400;
-      font-size: 40px;
-      line-height: 1.2;
-      letter-spacing: 0.04em;
-      color: #2e2f42;
+    font-size: 40px;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    color: #2e2f42;
 }
 
 .label {
   font-weight: 400;
-    font-size: 16px;
-    line-height: 1.5;
-    color: #2e2f42;
-    text-transform: uppercase;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2e2f42;
+  text-transform: uppercase;
+}
+
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 75px;
+  height: 40px;
+  color: #989898;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  background-color: #CFCFCF;
+  transition: background-color 250ms linear;
+}
+
+.active-btn {
+  background-color: #4E75FF;
+  color: #FFFFFF;
+}
+
+.active-btn:hover, 
+.active-btn:active {
+  background-color: #6C8CFF;
 }

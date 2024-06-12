@@ -6,6 +6,7 @@ import "flatpickr/dist/flatpickr.min.css";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
 import imageUrl from '../img/Error-icon.svg';
+
 const refs = {
     inputDate: document.querySelector('#datetime-picker'),
     startBtn: document.querySelector('[data-start]'),
@@ -35,11 +36,17 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-refs.startBtn.disabled = true;
+
+
 
 let userSelectedDate;
 let currentDate = Date.now();
 let intervalId;
+
+refs.startBtn.disabled = true;
+refs.startBtn.classList.remove('active-btn');
+refs.inputDate.disabled = false;
+refs.inputDate.classList.add('active-input');
 
 const options = {
   enableTime: true,
@@ -51,7 +58,9 @@ const options = {
       userSelectedDate = selectedDates[0];
       
       if (userSelectedDate < currentDate) {
-          refs.startBtn.disabled = true;
+        refs.startBtn.disabled = true;
+        refs.startBtn.classList.remove('active-btn');
+        
           iziToast.show({
               title: 'Error',
               titleSize: '16px',
@@ -68,7 +77,8 @@ const options = {
             theme: 'dark'
 });
       } else {
-          refs.startBtn.disabled = false;
+        refs.startBtn.disabled = false;
+        refs.startBtn.classList.add('active-btn');
       }; 
   },
 };
@@ -81,6 +91,9 @@ refs.startBtn.addEventListener('click', () => {
     console.log('start');
     refs.startBtn.disabled = true;
     refs.inputDate.disabled = true;
+    refs.inputDate.classList.remove('active-input');
+    refs.startBtn.classList.remove('active-btn');
+    
     intervalId = setInterval(() => {
         const diff = userSelectedDate - Date.now();
         const time = convertMs(diff);
@@ -92,7 +105,9 @@ refs.startBtn.addEventListener('click', () => {
 
     setTimeout(() => {
     clearInterval(intervalId);
-    refs.inputDate.disabled = false;
+      refs.inputDate.disabled = false;
+      refs.inputDate.classList.add('active-input');
+      refs.startBtn.classList.remove('active-btn');
     }, userSelectedDate - Date.now());
     
 });

@@ -37,8 +37,6 @@ function convertMs(ms) {
 }
 
 
-
-
 let userSelectedDate;
 let currentDate = Date.now();
 let intervalId;
@@ -87,6 +85,8 @@ const options = {
 
 flatpickr(refs.inputDate, options);
 
+const formatAsTwoDigits = (value => value.toString().padStart(2, "0"));
+
 refs.startBtn.addEventListener('click', () => {
     console.log('start');
     refs.startBtn.disabled = true;
@@ -114,7 +114,8 @@ refs.startBtn.addEventListener('click', () => {
 
 
 
-const formatAsTwoDigits = (value => value.toString().padStart(2, "0"));
+
+
 
 
 

@@ -36,16 +36,6 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
-
-let userSelectedDate;
-let currentDate = Date.now();
-let intervalId;
-
-refs.startBtn.disabled = true;
-refs.startBtn.classList.remove('active-btn');
-refs.inputDate.disabled = false;
-refs.inputDate.classList.add('active-input');
-
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -55,9 +45,9 @@ const options = {
       console.log(selectedDates[0]);
       userSelectedDate = selectedDates[0];
       
-      if (userSelectedDate < currentDate) {
+      if (userSelectedDate < Date.now()) {
         refs.startBtn.disabled = true;
-        refs.startBtn.classList.remove('active-btn');
+        updateElementStyle(refs.startBtn, 'active-btn');
         
           iziToast.show({
               title: 'Error',
@@ -73,26 +63,46 @@ const options = {
               position: 'topRight',
               progressBarColor: '#B51B1B',
             theme: 'dark'
-});
+      });
       } else {
         refs.startBtn.disabled = false;
-        refs.startBtn.classList.add('active-btn');
+        updateElementStyle(refs.startBtn, 'active-btn');
       }; 
   },
 };
 
+function updateElementStyle(element, nameClass) {
+  if (element.disabled) {
+    element.classList.remove(nameClass);
+  } else {
+    element.classList.add(nameClass);
+  }
+}
 
+function updateStyle() {
+  updateElementStyle(refs.inputDate, 'active-input');
+  updateElementStyle(refs.startBtn, 'active-btn');
+}
+
+const formatAsTwoDigits = (value => value.toString().padStart(2, "0"));
 
 flatpickr(refs.inputDate, options);
 
-const formatAsTwoDigits = (value => value.toString().padStart(2, "0"));
+let userSelectedDate;
+let intervalId;
+
+refs.startBtn.disabled = true;
+refs.inputDate.disabled = false;
+updateStyle();
+
+
 
 refs.startBtn.addEventListener('click', () => {
     console.log('start');
     refs.startBtn.disabled = true;
     refs.inputDate.disabled = true;
-    refs.inputDate.classList.remove('active-input');
-    refs.startBtn.classList.remove('active-btn');
+
+  updateStyle();
     
     intervalId = setInterval(() => {
         const diff = userSelectedDate - Date.now();
@@ -100,17 +110,16 @@ refs.startBtn.addEventListener('click', () => {
         refs.daysCounter.textContent = formatAsTwoDigits(time.days);
         refs.hoursCounter.textContent = formatAsTwoDigits(time.hours);
         refs.minCounter.textContent = formatAsTwoDigits(time.minutes);
-        refs.secCounter.textContent = formatAsTwoDigits(time.seconds);
+      refs.secCounter.textContent = formatAsTwoDigits(time.seconds);
+      if (diff <= 1000) {
+        clearInterval(intervalId);
+        refs.inputDate.disabled = false;
+        updateStyle();
+      }
     }, 1000)
-
-    setTimeout(() => {
-    clearInterval(intervalId);
-      refs.inputDate.disabled = false;
-      refs.inputDate.classList.add('active-input');
-      refs.startBtn.classList.remove('active-btn');
-    }, userSelectedDate - Date.now());
     
 });
+
 
 
 

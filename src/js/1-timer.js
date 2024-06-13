@@ -18,20 +18,15 @@ const refs = {
 };
 
 function convertMs(ms) {
-  // Number of milliseconds per unit of time
   const second = 1000;
   const minute = second * 60;
   const hour = minute * 60;
   const day = hour * 24;
 
-  // Remaining days
   const days = Math.floor(ms / day);
-  // Remaining hours
   const hours = Math.floor((ms % day) / hour);
-  // Remaining minutes
   const minutes = Math.floor(((ms % day) % hour) / minute);
-  // Remaining seconds
-    const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
     
   return { days, hours, minutes, seconds };
 }
@@ -50,24 +45,24 @@ const options = {
         updateElementStyle(refs.startBtn, 'active-btn');
         
           iziToast.show({
-              title: 'Error',
-              titleSize: '16px',
-              titleLineHeight: '1.5',
-              titleColor: '#FFFFFF',
-                message: "Please choose a date in the future",
-              messageSize: '16px',
-                messageLineHeight: '1.5',
-                backgroundColor: '#EF4040',
-                messageColor: '#FFFFFF',
-              iconUrl: imageUrl,
-              position: 'topRight',
-              progressBarColor: '#B51B1B',
+            title: 'Error',
+            titleSize: '16px',
+            titleLineHeight: '1.5',
+            titleColor: '#FFFFFF',
+            message: "Please choose a date in the future",
+            messageSize: '16px',
+            messageLineHeight: '1.5',
+            backgroundColor: '#EF4040',
+            messageColor: '#FFFFFF',
+            iconUrl: imageUrl,
+            position: 'topRight',
+            progressBarColor: '#B51B1B',
             theme: 'dark'
-      });
-      } else {
-        refs.startBtn.disabled = false;
-        updateElementStyle(refs.startBtn, 'active-btn');
-      }; 
+            });
+        } else {
+          refs.startBtn.disabled = false;
+          updateElementStyle(refs.startBtn, 'active-btn');
+        }; 
   },
 };
 
@@ -95,29 +90,25 @@ refs.startBtn.disabled = true;
 refs.inputDate.disabled = false;
 updateStyle();
 
-
-
 refs.startBtn.addEventListener('click', () => {
     console.log('start');
     refs.startBtn.disabled = true;
     refs.inputDate.disabled = true;
-
-  updateStyle();
+    updateStyle();
     
-    intervalId = setInterval(() => {
-        const diff = userSelectedDate - Date.now();
-        const time = convertMs(diff);
-        refs.daysCounter.textContent = formatAsTwoDigits(time.days);
-        refs.hoursCounter.textContent = formatAsTwoDigits(time.hours);
-        refs.minCounter.textContent = formatAsTwoDigits(time.minutes);
-      refs.secCounter.textContent = formatAsTwoDigits(time.seconds);
-      if (diff <= 1000) {
-        clearInterval(intervalId);
-        refs.inputDate.disabled = false;
-        updateStyle();
-      }
-    }, 1000)
-    
+  intervalId = setInterval(() => {
+    const diff = userSelectedDate - Date.now();
+    const time = convertMs(diff);
+    refs.daysCounter.textContent = formatAsTwoDigits(time.days);
+    refs.hoursCounter.textContent = formatAsTwoDigits(time.hours);
+    refs.minCounter.textContent = formatAsTwoDigits(time.minutes);
+    refs.secCounter.textContent = formatAsTwoDigits(time.seconds);
+    if (diff <= 1000) {
+      clearInterval(intervalId);
+      refs.inputDate.disabled = false;
+      updateStyle();
+    }
+  }, 1000);
 });
 
 

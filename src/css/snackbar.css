@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+}
+
+.link-to-main {
+  display: inline-block;
+  font-size: 14px;
+  text-decoration: none;
+  color: #4e75ff;
+  font-weight: 500;
+  border: 1px solid #4e75ff;
+  padding: 5px 5px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  transition: background-color 250ms linear;
+}
+
+.link-to-main:hover,
+.link-to-main:focus {
+  border-color: #ffffff;
+  background-color: #4e75ff;
+  color: #ffffff;
+}
+
+.delay-label {
+  display: flex;
+  flex-direction: column;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.delay-input {
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 360px;
+  height: 40px;
+  outline: none;
+  padding-left: 16px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+  margin-bottom: 10px;
+}
+
+.delay-input:hover,
+.delay-input:focus {
+  border-color: #2e2f42;
+}
+
+fieldset {
+  display: flex;
+  gap: 48px;
+  margin: 0px;
+  box-sizing: border-box;
+  width: 360px;
+  height: 78px;
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #808080;
+  padding: 24px 48px 8px 48px;
+  margin-bottom: 10px;
+}
+
+fieldset:hover {
+  stroke: #111111;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 360px;
+  height: 40px;
+  border: none;
+  background-color: #4e75ff;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+button:hover,
+button:focus {
+  background-color: #6c8cff;
+}

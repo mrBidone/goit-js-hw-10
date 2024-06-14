@@ -23,3 +23,30 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+
+.links-list {
+  margin: 0 0;
+  height: 100vh;
+  display: flex;
+  list-style: none;
+  gap: 100px;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(133, 186, 243);
+}
+
+.links-item {
+}
+
+.link {
+  text-decoration: none;
+  font-size: 50px;
+  cursor: pointer;
+  color: aliceblue;
+  transition: all 250ms linear;
+}
+
+.link:hover,
+.link:focus {
+  color: black;
+}

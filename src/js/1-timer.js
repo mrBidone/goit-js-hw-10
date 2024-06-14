@@ -1,20 +1,18 @@
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 
-
-import flatpickr from "flatpickr";
-import "flatpickr/dist/flatpickr.min.css";
-
-import iziToast from "izitoast";
-import "izitoast/dist/css/iziToast.min.css";
+import iziToast from 'izitoast';
+import 'izitoast/dist/css/iziToast.min.css';
 import imageUrl from '../img/Error-icon.svg';
 
 const refs = {
-    inputDate: document.querySelector('#datetime-picker'),
-    startBtn: document.querySelector('[data-start]'),
-    timerContainer: document.querySelector('.timer'),
-    daysCounter: document.querySelector('[data-days]'),
-    hoursCounter: document.querySelector('[data-hours]'),
-    minCounter: document.querySelector('[data-minutes]'),
-    secCounter: document.querySelector('[data-seconds]')
+  inputDate: document.querySelector('#datetime-picker'),
+  startBtn: document.querySelector('[data-start]'),
+  timerContainer: document.querySelector('.timer'),
+  daysCounter: document.querySelector('[data-days]'),
+  hoursCounter: document.querySelector('[data-hours]'),
+  minCounter: document.querySelector('[data-minutes]'),
+  secCounter: document.querySelector('[data-seconds]'),
 };
 
 function convertMs(ms) {
@@ -27,7 +25,7 @@ function convertMs(ms) {
   const hours = Math.floor((ms % day) / hour);
   const minutes = Math.floor(((ms % day) % hour) / minute);
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
-    
+
   return { days, hours, minutes, seconds };
 }
 
@@ -37,32 +35,32 @@ const options = {
   defaultDate: new Date(),
   minuteIncrement: 1,
   onClose(selectedDates) {
-      console.log(selectedDates[0]);
-      userSelectedDate = selectedDates[0];
-      
-      if (userSelectedDate < Date.now()) {
-        refs.startBtn.disabled = true;
-        updateElementStyle(refs.startBtn, 'active-btn');
-        
-          iziToast.show({
-            title: 'Error',
-            titleSize: '16px',
-            titleLineHeight: '1.5',
-            titleColor: '#FFFFFF',
-            message: "Please choose a date in the future",
-            messageSize: '16px',
-            messageLineHeight: '1.5',
-            backgroundColor: '#EF4040',
-            messageColor: '#FFFFFF',
-            iconUrl: imageUrl,
-            position: 'topRight',
-            progressBarColor: '#B51B1B',
-            theme: 'dark'
-            });
-        } else {
-          refs.startBtn.disabled = false;
-          updateElementStyle(refs.startBtn, 'active-btn');
-        }; 
+    console.log(selectedDates[0]);
+    userSelectedDate = selectedDates[0];
+
+    if (userSelectedDate < Date.now()) {
+      refs.startBtn.disabled = true;
+      updateElementStyle(refs.startBtn, 'active-btn');
+
+      iziToast.show({
+        title: 'Error',
+        titleSize: '16px',
+        titleLineHeight: '1.5',
+        titleColor: '#FFFFFF',
+        message: 'Please choose a date in the future',
+        messageSize: '16px',
+        messageLineHeight: '1.5',
+        backgroundColor: '#EF4040',
+        messageColor: '#FFFFFF',
+        iconUrl: imageUrl,
+        position: 'topRight',
+        progressBarColor: '#B51B1B',
+        theme: 'dark',
+      });
+    } else {
+      refs.startBtn.disabled = false;
+      updateElementStyle(refs.startBtn, 'active-btn');
+    }
   },
 };
 
@@ -79,7 +77,7 @@ function updateStyle() {
   updateElementStyle(refs.startBtn, 'active-btn');
 }
 
-const formatAsTwoDigits = (value => value.toString().padStart(2, "0"));
+const formatAsTwoDigits = value => value.toString().padStart(2, '0');
 
 flatpickr(refs.inputDate, options);
 
@@ -91,11 +89,10 @@ refs.inputDate.disabled = false;
 updateStyle();
 
 refs.startBtn.addEventListener('click', () => {
-    console.log('start');
-    refs.startBtn.disabled = true;
-    refs.inputDate.disabled = true;
-    updateStyle();
-    
+  refs.startBtn.disabled = true;
+  refs.inputDate.disabled = true;
+  updateStyle();
+
   intervalId = setInterval(() => {
     const diff = userSelectedDate - Date.now();
     const time = convertMs(diff);
@@ -110,12 +107,3 @@ refs.startBtn.addEventListener('click', () => {
     }
   }, 1000);
 });
-
-
-
-
-
-
-
-
-
